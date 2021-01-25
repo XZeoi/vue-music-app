@@ -1,0 +1,208 @@
+/* 1. reset */
+
+* {
+  /* 防止在给元素添加padding时，打乱布局，因此按照边框设置大小 */
+  box-sizing: border-box;
+  /* 在网页浏览时 tab 键切换时，设置目标轮廓为none */
+  outline: none;
+}
+
+html {
+  /* 设置一个基本字体 */
+  font-size: 13px;
+}
+
+body {
+  /* 去除浏览器中 body 默认 margin */
+  margin: 0;
+  /* 设置字体 */
+  // font-family: Arial, Helvetical, sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+	/* 定义一个基本行高 */
+  // line-height: 1.2em;
+  /* 定义背景颜色 */
+  background: #f1f1f1;
+  /* 字体平滑 */
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #999;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+
+// 工具样式
+/* 2. colors */
+$colors: (
+	"primary": #ff3f00,
+	"white": #fff,
+	"light": #f9f9f9,
+	"grey": #999,
+  "dark": #4a4a4a,
+  "dark-1": #273036,
+  "black": #000,
+);
+
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+  .bg-#{$colorKey} {
+    background-color: $color;
+  }
+}
+
+/* 3. text(设置文字对齐方式) */
+@each $var in (left, center, right) {
+  .text-#{$var} {
+    text-align: $var;
+  }
+}
+
+/* 4. font size */
+$base-font-size: 1rem;
+$font-sizes: (
+	xs: 0.7692, /* 10px */
+	sm: 0.9231, /* 12px */
+	md: 1,      /* 13px */
+	lg: 1.0769, /* 14px */
+	xl: 1.2308, /* 16px */
+);
+
+@each $sizeKey, $size in $font-sizes {
+  .fs-#{$sizeKey} {
+    font-size: $size * $base-font-size;
+  }
+}
+
+// width, height
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+
+/* 5. flex */
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+$flex-jc: ( /* justify-content */
+	start: flex-start,
+	end: flex-end,
+	center: center,
+	between: space-between,
+	around: space-around
+); 
+@each $key, $value in $flex-jc {
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+}
+
+$flex-ai: ( /* align-items */
+	start: flex-start,
+  end: flex-end,
+  base: baseline,
+	center: center,
+	stretch: stretch,
+); 
+@each $key, $value in $flex-jc {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+};
+
+.flex-1 { /* 左边固定，右边自动撑满 */
+  flex: 1;
+};
+
+.flex-grow-1 { 
+  flex-grow: 1;
+}
+
+/* spacing(margin & padding) */
+$spacing-types: (
+	m: margin,
+	p: padding
+);
+$spacing-directions: (
+	t: top,
+	r: right,
+	b: bottom,
+	l: left
+);
+$spacing-base-size: 1rem;
+$spacing-sizes: (
+	0: 0,
+	1: 0.25,
+	2: 0.5,
+	3: 1,
+	4: 1.5,
+  5: 3,
+  6: 4,
+  7: 5
+);
+@each $typeKey, $type in $spacing-types {
+  
+  /* .m-1 */
+  @each $sizeKey, $size in $spacing-sizes {
+      .#{$typeKey}-#{$sizeKey} {
+        #{$type}: $size * $spacing-base-size;
+    }
+	}
+
+  /* .mx-1, .my-1 */
+	@each $sizeKey, $size in $spacing-sizes {
+      .#{$typeKey}x-#{$sizeKey} {
+        #{$type}-left: $size * $spacing-base-size;
+     		#{$type}-right: $size * $spacing-base-size;
+    	}
+
+			.#{$typeKey}y-#{$sizeKey} {
+        #{$type}-top: $size * $spacing-base-size;
+     		#{$type}-bottom: $size * $spacing-base-size;
+    	}
+	}
+  
+  /* .mt-1 表示 { margin-top: 0.25rem} */
+  @each $directionKey, $direction in $spacing-directions {
+    @each $sizeKey, $size in $spacing-sizes {      
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+    }
+    }
+  }
+}
+
+
+// button
+.btn {
+  border: none;
+  border-radius: 0.1538rem;
+  font-size: map-get($font-sizes, 'sm') * $base-font-size;
+  padding: 0.2rem 0.6rem;
+}
+
+// nav
+.nav {
+  .nav-item {
+    border-bottom: 3px solid transparent;
+    padding-bottom: .2rem;
+    &.active {
+      border-bottom: 3px solid #fff;
+    }
+  }
+}
