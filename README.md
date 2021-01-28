@@ -139,3 +139,18 @@ export default {
 </style>
 ```
 
+### [vue-awesome-swiper第三方插件的使用](https://github.com/surmon-china/vue-awesome-swiper)
+
+1. 若使用 `pagination` 不显示， 且设置自动播放时不能自动播放，则需要额外导入下面程序
+   - swiper 6.X的版本的问题
+
+```javascript
+import Swiper2, {Navigation, Pagination, Autoplay} from 'swiper'
+Swiper2.use([Navigation, Pagination, Autoplay])
+```
+
+
+
+2. 修改 `pagination` 的背景颜色时，不能生效。
+   - 原因：组件中 `style` 使用了 `scoped` ，`swiper`分页样式就失效了。分页是在 `mounted` 里创建的，此时创建的DOM，vue不会帮 `swiper` 的`pagination` 加上 `scoped` 自定义属性。
+
