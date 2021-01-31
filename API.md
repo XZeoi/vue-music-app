@@ -39,3 +39,63 @@
 **接口地址 :** `/song/url`
 
 **调用例子 :** `/song/url?id=33894312` `/song/url?id=405998841,33894312`
+
+
+
+### [获取歌词](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=获取歌词)
+
+说明 : 调用此接口 , 传入音乐 id 可获得对应音乐的歌词 ( 不需要登录 )
+
+**必选参数 :** `id`: 音乐 id
+
+**接口地址 :** `/lyric`
+
+**调用例子 :** `/lyric?id=33894312`
+
+
+
+### [获取歌曲详情](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=获取歌曲详情)
+
+说明 : 调用此接口 , 传入音乐 id(支持多个 id, 用 `,` 隔开), 可获得歌曲详情(注意:歌曲封面现在需要通过专辑内容接口获取)
+
+**必选参数 :** `ids`: 音乐 id, 如 `ids=347230`
+
+**接口地址 :** `/song/detail`
+
+**调用例子 :** `/song/detail?ids=347230`,`/song/detail?ids=347230,347231`
+
+
+
+### [获取专辑内容](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=获取专辑内容)
+
+说明 : 调用此接口 , 传入专辑 id, 可获得专辑内容
+
+**必选参数 :** `id`: 专辑 id
+
+**接口地址 :** `/album`
+
+**调用例子 :** `/album?id=32311`
+
+
+
+### [专辑动态信息](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=专辑动态信息)
+
+说明 : 调用此接口 , 传入专辑 id, 可获得专辑动态信息,如是否收藏,收藏数,评论数,分享数
+
+**必选参数 :** `id`: 专辑 id
+
+**接口地址 :** `/album/detail/dynamic`
+
+**调用例子 :** `/album/detail/dynamic?id=32311`
+
+
+
+### [获取相似音乐](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=获取相似音乐)
+
+说明 : 调用此接口 , 传入歌曲 id, 可获得相似歌曲
+
+**必选参数 :** `id`: 歌曲 id
+
+**接口地址 :** `/simi/song`
+
+**调用例子 :** `/simi/song?id=347230` ( 对应 ' 光辉岁月 ' 相似歌曲 )

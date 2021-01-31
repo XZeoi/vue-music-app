@@ -38,6 +38,7 @@ export default {
 }
 .card-title {
   font-size: 20px;
+  font-weight: 500;
 }
 
 .card-content {

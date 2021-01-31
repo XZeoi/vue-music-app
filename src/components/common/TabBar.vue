@@ -3,7 +3,6 @@
     <div class="tab-bar">
         <slot></slot>
     </div>
-    <div class="layer"></div>
   </div>
 </template>
 
@@ -21,6 +20,7 @@ export default {
 
 <style scoped>
 .tab-bar {
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: space-evenly;

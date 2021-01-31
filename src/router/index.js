@@ -6,6 +6,8 @@ import Music from 'views/Music.vue'
 import Hey from 'views/Hey.vue'
 import Center from 'views/Center.vue'
 
+import MusicPlayer from 'views/common/MusicPlayer.vue'
+
 const MusicLibrary = () => import('views/home/MusicLibrary')
 const Recommend = () => import('views/home/Recommend')
 const Video = () => import('views/home/Video')
@@ -48,6 +50,11 @@ const routes = [
         component: Center
       }
     ]
+  },
+  {
+    path: '/musicplayer/:id',
+    name: 'MusicPlayer',
+    component: MusicPlayer
   }
 ]
 

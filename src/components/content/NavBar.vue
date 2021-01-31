@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-bar d-flex ai-center pt-2 pb-2 bg-white">
+  <div class="nav-bar d-flex ai-center  pb-2 bg-white">
     <div class="nav-title d-flex flex-1  ai-end jc-around  ml-7 mr-5">
       <div  
       @click="titleClick(index, $event, item)"
@@ -36,7 +36,7 @@ export default {
       if(this.selectedId === index) {
         return
       }
-      event.target.style.fontSize = "24px"
+      event.target.style.fontSize = "28px"
       // 通过 selectedId 中间状态来判断切换前，被选中的 DOM 元素
       // 切换后，之前被选中的 item 需要缩小
       switch(this.selectedId) {
@@ -64,6 +64,19 @@ export default {
 </script>
 
 <style scoped>
+.nav-bar {
+  /* height: 88px; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+/* .nav-bar::after {
+ height: 88px;
+} */
+
 .nav-title {
   /* tab 选项卡容器高度一定要设置， 否则切换选项卡时会整体抖动 */
   height: 49px;
@@ -79,6 +92,6 @@ export default {
 
 .nav-title div:nth-child(2) { 
   /* 给选项卡第一个 item 设置一个初始大小 */
-  font-size: 24px;
+  font-size: 28px;
 }
 </style>

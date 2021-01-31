@@ -152,5 +152,90 @@ Swiper2.use([Navigation, Pagination, Autoplay])
 
 
 2. 修改 `pagination` 的背景颜色时，不能生效。
+
    - 原因：组件中 `style` 使用了 `scoped` ，`swiper`分页样式就失效了。分页是在 `mounted` 里创建的，此时创建的DOM，vue不会帮 `swiper` 的`pagination` 加上 `scoped` 自定义属性。
+
+     
+
+3. 事件监听失效BUG：
+
+   - **在轮播图上绑定click事件，点击第一张和最后一张无效。**
+   - 原因：
+     - 当设置 `loop: true` 时，swiper会自动复制第一个和最后一个页面进行轮播。但由于只复制页面没有复制点击事件，因此点击事件就会失效。
+   - 解决办法：
+     - 在 `<swiper :options="swiperOptions">` 中的`swiperOptions` 绑定数据中添加 `on`  属性，在 `on`  属性中定义函数，即为点击事件。
+       - 可传入两个参数（均可选）
+         - swiper：swiper组件实例
+         - event：touchend事件
+
+   ```vue
+   <script>
+   data() {
+     swiperOptions: {
+       on: {
+         //传入一个参数时，为swiper
+         click(swiper, event){
+           console.log(swiper) //swiper：组件实例
+           console.log(event)  //event：touchend事件
+         }
+       }
+     }
+   }
+   </script>
+   ```
+
+   - **若要传入参数，例如recommend组件中banner轮播图中，需点击时传递所点击的音乐id**
+     - 解决办法：给各项绑定自定义属性`data-*`
+       - 首先在`<swiper-slide :data-ibanner="banner">` 动态绑定banner数据
+       - **BUG**：**读取自定义属性`ibanner`时，读取为`[object, Object]`，无法正常读取banner**
+         - 原因：由于banner是对象，在自定义属性`data-*`中都会把值`.toString()` 成字符串格式，若之后用`JSON.parse()` 转化为对象，会以下报错 **`Unexpected token o in JSON at position 1`**
+         - 解决办法：
+           - 在动态绑定banner时，先理由`JSON.stringify()`把banner对象转化为**JSON字符串**格式即可
+           - 后续取出的时候再用`JSON.parse()` 转化为对象不会报错，可正常取出。
+           - 具体代码如下：
+
+```vue
+<template>
+	<swiper-slide v-for="(banner, index) in banners" :key="index" :data-banner="JSON.stringify(banner)">
+    <img :src="banner.pic"/>
+	</swiper-slide>
+</template>
+<script>
+data() {
+  return {
+    swiperOptions: {
+    	on: {
+      	//传入一个参数时，为swiper
+     	 click(swiper){
+        let banner = JSON.parse(swiper.clickedSlide.dataset.banner)
+       }
+    	}
+  	}
+  }
+}
+</script>
+```
+
+- 注意点：
+  - on 属性中函数中的 this 并非执行 vm 实例，而是指向 swiper 组件实例
+  - 因此需要在 `data(){}` 中定义 thi s指向
+
+```vue
+<script>
+  data() {
+    let that = this;
+    return {
+      swiperOptions: {
+    	on: {
+      	//传入一个参数时，为swiper
+     	 click(swiper){
+        let banner = JSON.parse(swiper.clickedSlide.dataset.banner)
+        that.$router.push({name: 'MusicPlayer', params: {id: banner.song.id}})
+       }
+    	}
+  	}
+    }
+  }
+</script>
+```
 
