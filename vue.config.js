@@ -8,7 +8,8 @@ module.exports = {
         "common":"@/components/common",
         "content":"@/components/content",
         "store": "@/store",
-        "views": "@/views"
+        "views": "@/views",
+        "utils": "@/utils"
       }
     }
   }

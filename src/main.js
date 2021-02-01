@@ -14,6 +14,12 @@ Swiper2.use([Navigation, Pagination, Autoplay])
 import 'assets/css/style.scss'
 import 'assets/iconfont/iconfont.css'
 
+// 全局过滤器
+import filters from 'utils/time.js'
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
+
 Vue.config.productionTip = false
 
 new Vue({
