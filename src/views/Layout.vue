@@ -1,7 +1,11 @@
 <template>
   <div class="layout">
     <router-view></router-view>
-    <tab-bar v-model="activedName">
+
+    <music-player></music-player>
+
+    <!-- tab-bar 暂时待定处理 -->
+    <!-- <tab-bar v-model="activedName">
       <tab-bar-item 
       :title="item.title" 
       :icon="item.icon"
@@ -9,20 +13,23 @@
       :to="item.path"
       v-for="(item, i) in items" 
       :key="i"></tab-bar-item>
-    </tab-bar>
+    </tab-bar> -->
   </div>
 </template>
 
 <script>
-import TabBar from "common/TabBar"
-import TabBarItem from "common/TabBarItem"
+// import TabBar from "common/TabBar"
+// import TabBarItem from "common/TabBarItem"
+import MusicPlayer from "views/common/MusicPlayer.vue"
+
 
 
 export default {
   name: 'Layout',
   components: {
-    TabBar,
-    TabBarItem
+    // TabBar,
+    // TabBarItem,
+    MusicPlayer
   },
   data() {
     return {

@@ -13,11 +13,11 @@
     <div class="card-container">
       <!-- nav -->
       <div class="recommend-nav d-flex jc-around text-center fs-sm mt-4 mb-2">
-        <div class="recommend-nav-item">
+        <div class="recommend-nav-item" @click="$router.push('/recommendperday')">
           <img src="~assets/img/30.png" alt="" />
           <div>每日推荐</div>
         </div>
-        <div class="recommend-nav-item">
+        <div class="recommend-nav-item" @click="$router.push('/radiorecommend')">
           <img src="~assets/img/radio.png" alt="" />
           <div>电台</div>
         </div>
@@ -37,6 +37,7 @@
           v-for="(item, index) in recommendSheet"
           :key="index"
           :data="item"
+         
         >
         </music-card-item>
       </music-card>
@@ -105,12 +106,19 @@ export default {
         on: {
           // 监听轮播图点击事件
           tap(swiper) {
+            console.log('1')
             let banner = JSON.parse(swiper.clickedSlide.dataset.banner) 
             // 判断 song 是否存在 
             //    这里考虑有些banner是活动 banner 或者广告 banner
-            //    至于活动 banner 或者广告 banner 的跳转，此处我们暂时不做处理   
+            //    至于活动 banner 或者广告 banner 的跳转，此处我们暂时不做处理  
+            console.log(banner)
+
             if(!banner.song) return;
-            that.$router.push({name: 'MusicPlayer', params: {id: banner.song.id}})
+            // that.$router.push({name: 'MusicPlayer', params: {id: banner.song.id}})
+            // 展示音乐播放页面，将歌曲id传递过去
+            that.$store.commit('playView', {status:true,id:banner.song.id})
+            // 添加歌曲
+            that.$store.dispatch("addSongA", banner.song.id);
           }
         }
       },
@@ -119,6 +127,7 @@ export default {
       },
     };
   },
+
   created() {
     this.bannerFetch();
     this.recommendFetch();
@@ -135,6 +144,7 @@ export default {
     async recommendFetch() {
       const data = await getRecommendSongSheet(6);
       this.recommendSheet = data.result;
+      console.log(data.result)
     },
     async newSongListFetch() {
       const { result: newSongList } = await getNewSongList(9);

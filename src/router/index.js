@@ -6,7 +6,10 @@ import Music from 'views/Music.vue'
 import Hey from 'views/Hey.vue'
 import Center from 'views/Center.vue'
 
-import MusicPlayer from 'views/common/MusicPlayer.vue'
+import RecommendPerDay from 'views/pages/RecommendPerDay'
+import RadioRecommend from 'views/pages/RadioRecommend'
+
+// import MusicPlayer from 'views/common/MusicPlayer.vue'
 
 const MusicLibrary = () => import('views/home/MusicLibrary')
 const Recommend = () => import('views/home/Recommend')
@@ -48,14 +51,34 @@ const routes = [
         path: '/center',
         name: 'Center',
         component: Center
+      },
+      {
+        path: '/recommendperday',
+        name: 'RecommendPerDay',
+        component: RecommendPerDay
+      },
+      {
+        path: '/radiorecommend',
+        name: 'RadioRecommend',
+        component: RadioRecommend
       }
     ]
   },
-  {
-    path: '/musicplayer/:id',
-    name: 'MusicPlayer',
-    component: MusicPlayer
-  }
+  
+  /**
+   * 暂时先将 musicplayer 当成组件使用，不当页面
+  */
+  // {
+  //   path: '/musicplayer/:id',
+  //   name: 'MusicPlayer',
+  //   component: MusicPlayer,
+  //   // keepAlive:true
+  // },
+  // 当以上任意请求都不符合的时候，跳转至首页
+  // {
+  //   path: ' * ',
+  //   redirect: '/'
+  // }
 ]
 
 const router = new VueRouter({

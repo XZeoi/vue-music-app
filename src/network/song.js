@@ -17,3 +17,12 @@ export function getSongInfoById(id) {
     }
   })
 }
+
+export function getLyricById(id) {
+  return request({
+    url: '/lyric',
+    params: {
+      id
+    }
+  })
+}

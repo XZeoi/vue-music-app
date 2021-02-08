@@ -239,3 +239,23 @@ data() {
 </script>
 ```
 
+### MusicPlayer 页面
+
+- 退出时，播放不会停止，且退到上一次的页面
+
+```
+一开始将MusicPlayer播放页面作为一个路由进行展示，发现只要退出该路由，组件即被销毁，播放停止。显然这不是我们想要的结果。
+```
+
+- 因此，MusicPlayer页面只能当成组件放在项目中，通过根据播放歌曲列表的长度来控制该页面的显示。
+- 所有的数据都应该放入 vuex 中进行共享；
+
+BUG1：
+
+- 我们设置了一个公共状态 fullScreen，默认值为false，用于控制播放页面的显示。
+- 我们需要通过 Mutation 来改变 fullScreen的状态。
+- 在 Mutation 中操作时，遇到一个问题：
+  - 我们开始的时候通过解构将fullScreen 从 state中解构出来；
+  - 但是发现，在Mutation中修改解构出来的fullScreen是无法本质上修改state中的fullScreen，这是因为解构出来的是一个新的变量，只是把state中的fullScreen的状态重新赋值给解构后的fullScreen，而且fullScreen是非引用型数据，因此这里需要注意解构带来的不确定性。
+  - 结论：这里fullScreen不能解构，只可按照正常的state.fullScreen方法修改
+

@@ -13,6 +13,9 @@ let timeFormat = val => {
    if( val > 60 ) {
     minute = Math.floor(val/60);
     second = Math.floor(val%60)
+   } else {
+     minute = 0;
+     second = Math.floor(val)
    }
    if(second<10) {
      second = `0${second}`

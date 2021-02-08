@@ -71,7 +71,8 @@ $font-sizes: (
 	sm: 0.9231, /* 12px */
 	md: 1,      /* 13px */
 	lg: 1.0769, /* 14px */
-	xl: 1.2308, /* 16px */
+  xl: 1.2308, /* 16px */
+  xxl: 1.25
 );
 
 @each $sizeKey, $size in $font-sizes {
@@ -104,7 +105,8 @@ $flex-jc: ( /* justify-content */
 	end: flex-end,
 	center: center,
 	between: space-between,
-	around: space-around
+  around: space-around,
+  evenly: space-evenly
 ); 
 @each $key, $value in $flex-jc {
   .jc-#{$key} {

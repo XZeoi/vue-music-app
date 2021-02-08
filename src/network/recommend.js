@@ -29,3 +29,22 @@ export function getNewSongList(limit) {
     }
   })
 }
+
+// 这里获取每日推荐歌曲，实质上需要登录权限，因暂时不考虑做登录
+//  功能，所以接口采用 新歌推荐 一样的接口资源，且固定请求数目为30首
+export function getRecommendPerDayList() {
+  return request({
+    url: '/personalized/newsong',
+    method: 'get',
+    params: {
+      limit: 30
+    }
+  })
+}
+
+export function getRadioRecommendList() {
+  return request({
+    url: '/personalized/djprogram',
+    method: 'get'
+  })
+}
