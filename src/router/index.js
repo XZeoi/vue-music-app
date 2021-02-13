@@ -8,6 +8,8 @@ import Center from 'views/Center.vue'
 
 import RecommendPerDay from 'views/pages/RecommendPerDay'
 import RadioRecommend from 'views/pages/RadioRecommend'
+import MusicRank from 'views/pages/MusicRank'
+import SongSheet from 'views/pages/SongSheet'
 
 // import MusicPlayer from 'views/common/MusicPlayer.vue'
 
@@ -61,6 +63,16 @@ const routes = [
         path: '/radiorecommend',
         name: 'RadioRecommend',
         component: RadioRecommend
+      },
+      {
+        path: '/musicrank',
+        name: 'MusicRank',
+        component: MusicRank
+      },
+      {
+        path: '/songsheet',
+        name: 'SongSheet',
+        component: SongSheet
       }
     ]
   },

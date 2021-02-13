@@ -48,3 +48,22 @@ export function getRadioRecommendList() {
     method: 'get'
   })
 }
+
+// 获取音乐排行榜
+export function getMusicRankList() {
+  return request({
+    url: '/toplist/detail',
+    // url: '/toplist',
+    method: 'get'
+  })
+}
+// 歌单详情
+export function getMusicSheetDetails(id) {
+  return request({
+    url: '/playlist/detail',
+    method: 'get',
+    params: {
+      id
+    }
+  }) 
+}

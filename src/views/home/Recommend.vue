@@ -25,7 +25,7 @@
           <img src="~assets/img/time.png" alt="" />
           <div>时光·晚安</div>
         </div>
-        <div class="recommend-nav-item">
+        <div class="recommend-nav-item" @click="$router.push('/musicrank')">
           <img src="~assets/img/top.png" alt="" />
           <div>排行榜</div>
         </div>
@@ -37,7 +37,7 @@
           v-for="(item, index) in recommendSheet"
           :key="index"
           :data="item"
-         
+          @click.native="$router.push(`/songsheet/${item.id}`)"
         >
         </music-card-item>
       </music-card>
@@ -144,7 +144,7 @@ export default {
     async recommendFetch() {
       const data = await getRecommendSongSheet(6);
       this.recommendSheet = data.result;
-      console.log(data.result)
+      console.log('sheet',data.result)
     },
     async newSongListFetch() {
       const { result: newSongList } = await getNewSongList(9);
